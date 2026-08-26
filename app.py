@@ -29,11 +29,13 @@ def load_data():
 state, eq_df, trade_df = load_data()
 
 # Portfolio Return Calculation
-current_val = eq_df["Portfolio_Value"].iloc[-1] if not eq_df.empty else state["initial_capital"]
-tot_ret = ((current_val - state["initial_capital"]) / state["initial_capital"]) * 100
+init_cap = state.get("initial_capital", 500000.0)
+current_val = eq_df["Portfolio_Value"].iloc[-1] if not eq_df.empty else init_cap
+tot_ret = ((current_val - init_cap) / init_cap) * 100
 
-# Benchmark Returns Calculation
+# Benchmark Calculations (Normalized to Initial Capital)
 benchmark_returns = {}
+benchmark_values = {}
 bm_prices = pd.DataFrame()
 
 if not eq_df.empty:
@@ -55,18 +57,25 @@ if not eq_df.empty:
                 s = bm_prices[sym].dropna()
                 pct_chg = ((s.iloc[-1] - s.iloc[0]) / s.iloc[0]) * 100
                 benchmark_returns[name] = pct_chg
+                benchmark_values[name] = init_cap * (1 + (pct_chg / 100.0))
             else:
                 benchmark_returns[name] = 0.0
+                benchmark_values[name] = init_cap
     except Exception:
         for name in BENCHMARKS:
             benchmark_returns[name] = 0.0
+            benchmark_values[name] = init_cap
+else:
+    for name in BENCHMARKS:
+        benchmark_returns[name] = 0.0
+        benchmark_values[name] = init_cap
 
-# Metric Cards Bar
+# Metric Cards (Normalized monetary values)
 col1, col2, col3, col4, col5 = st.columns(5)
-col1.metric("Strategy Return", f"₹{current_val:,.0f}", f"{tot_ret:+.2f}%")
-col2.metric("Nifty Midcap 100", "Benchmark", f"{benchmark_returns.get('Nifty Midcap 100', 0.0):+.2f}%")
-col3.metric("Nifty 500", "Benchmark", f"{benchmark_returns.get('Nifty 500', 0.0):+.2f}%")
-col4.metric("Nifty 50", "Benchmark", f"{benchmark_returns.get('Nifty 50', 0.0):+.2f}%")
+col1.metric("Strategy Value", f"₹{current_val:,.0f}", f"{tot_ret:+.2f}%")
+col2.metric("Nifty Midcap 100", f"₹{benchmark_values.get('Nifty Midcap 100', init_cap):,.0f}", f"{benchmark_returns.get('Nifty Midcap 100', 0.0):+.2f}%")
+col3.metric("Nifty 500", f"₹{benchmark_values.get('Nifty 500', init_cap):,.0f}", f"{benchmark_returns.get('Nifty 500', 0.0):+.2f}%")
+col4.metric("Nifty 50", f"₹{benchmark_values.get('Nifty 50', init_cap):,.0f}", f"{benchmark_returns.get('Nifty 50', 0.0):+.2f}%")
 col5.metric("Active Positions", f"{len(state['holdings'])} / 15")
 
 st.divider()
@@ -75,7 +84,7 @@ st.divider()
 st.subheader("📈 Performance % Comparison (Strategy vs Benchmarks)")
 if not eq_df.empty:
     eq_df['Date'] = pd.to_datetime(eq_df['Date'])
-    eq_df['Strategy %'] = ((eq_df['Portfolio_Value'] - state['initial_capital']) / state['initial_capital']) * 100
+    eq_df['Strategy %'] = ((eq_df['Portfolio_Value'] - init_cap) / init_cap) * 100
     
     perf_df = eq_df[['Date', 'Strategy %']].set_index('Date')
     
@@ -90,7 +99,7 @@ if not eq_df.empty:
     fig.update_layout(hovermode="x unified", yaxis_title="Percentage Change (%)")
     st.plotly_chart(fig, use_container_width=True)
 else:
-    st.info("No execution data recorded yet. Metrics and comparative charts will display after your first daily execution.")
+    st.info("No execution data recorded yet. Comparative chart will display after historical days accumulate.")
 
 # Section 2: Active Holdings Table
 st.subheader("📋 Active Holdings & Dynamic Stops")
@@ -103,7 +112,7 @@ if state["holdings"]:
             "Entry Price (₹)": f"₹{info['entry_price']:.2f}",
             "Shares": info["shares"],
             "Peak Price (₹)": f"₹{info['peak']:.2f}",
-            "Position Value (₹)": f"₹{info['shares'] * info['entry_price']:,.2f}"
+            "Capital Allocated (₹)": f"₹{info['shares'] * info['entry_price']:,.2f}"
         })
     st.dataframe(pd.DataFrame(h_list), use_container_width=True)
 else:
