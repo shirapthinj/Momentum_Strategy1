@@ -7,26 +7,39 @@ import os
 
 st.set_page_config(page_title="Momentum Strategy Dashboard", layout="wide")
 
-# Custom CSS for Header Bolding, Larger Font Size, and Centering
+# Custom CSS for HTML Tables (Bold, 16px Centered Headers & Centered Cells)
 st.markdown("""
 <style>
-    /* Dataframe Header Styling (Bold, Centered, Larger Font) */
-    div[data-testid="stDataFrame"] th, 
-    div[data-testid="stDataFrame"] div[role="columnheader"] {
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: 20px;
+    }
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: inherit;
+    }
+    .custom-table th {
         font-size: 16px !important;
         font-weight: 800 !important;
         text-align: center !important;
-        justify-content: center !important;
+        padding: 12px 10px;
+        border-bottom: 2px solid rgba(128, 128, 128, 0.4);
+        background-color: rgba(128, 128, 128, 0.1);
     }
-    
-    /* Data Cell Value Styling (Standard Font Size, Centered) */
-    div[data-testid="stDataFrame"] div[role="gridcell"] {
+    .custom-table td {
         font-size: 14px !important;
         text-align: center !important;
-        justify-content: center !important;
+        padding: 10px 8px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
     }
 </style>
 """, unsafe_allow_html=True)
+
+def display_custom_table(df):
+    html_table = df.to_html(index=False, escape=False, classes="custom-table")
+    st.markdown(f'<div class="table-wrapper">{html_table}</div>', unsafe_allow_html=True)
 
 STATE_FILE = "data/portfolio_state.json"
 TRADE_LOG_FILE = "data/trade_log.csv"
@@ -91,7 +104,7 @@ else:
         benchmark_returns[name] = 0.0
         benchmark_values[name] = init_cap
 
-# Metric Cards (Monetary comparisons)
+# Metric Cards
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Strategy Value", f"₹{current_val:,.0f}", f"{tot_ret:+.2f}%")
 col2.metric("Nifty Midcap 100", f"₹{benchmark_values.get('Nifty Midcap 100', init_cap):,.0f}", f"{benchmark_returns.get('Nifty Midcap 100', 0.0):+.2f}%")
@@ -101,7 +114,7 @@ col5.metric("Active Positions", f"{len(state['holdings'])} / 15")
 
 st.divider()
 
-# Section 1: Comparative Equity Curve Chart
+# Section 1: Performance Comparison Chart
 st.subheader("📈 Performance % Comparison (Strategy vs Benchmarks)")
 if not eq_df.empty:
     eq_df['Date'] = pd.to_datetime(eq_df['Date'])
@@ -124,7 +137,7 @@ else:
 
 st.divider()
 
-# Section 2: Active Holdings Performance Graph & Table
+# Section 2: Active Holdings Table & Graph
 st.subheader("📋 Active Holdings Performance & Dynamic Stops")
 if state["holdings"]:
     tickers_list = list(state["holdings"].keys())
@@ -172,7 +185,7 @@ if state["holdings"]:
     df_h = pd.DataFrame(h_list)
     df_h = df_h.sort_values(by="PnL (%)", ascending=False).reset_index(drop=True)
 
-    # 1. Performance Bar Chart
+    # Performance Bar Chart
     fig_holdings = px.bar(
         df_h,
         x="Ticker",
@@ -191,7 +204,7 @@ if state["holdings"]:
     )
     st.plotly_chart(fig_holdings, use_container_width=True)
 
-    # 2. Formatted & Center-Aligned Holdings Table
+    # Formatted HTML Table
     df_display = df_h.copy()
     df_display["Entry Price (₹)"] = df_display["Entry Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
     df_display["Current Price (₹)"] = df_display["Current Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
@@ -200,24 +213,16 @@ if state["holdings"]:
     df_display["Unrealized PnL (₹)"] = df_display["Unrealized PnL (₹)"].apply(lambda x: f"₹{x:,.2f}")
     df_display["PnL (%)"] = df_display["PnL (%)"].apply(lambda x: f"{x:+.2f}%")
 
-    st.dataframe(
-        df_display,
-        use_container_width=True,
-        column_config={col: st.column_config.Column(alignment="center") for col in df_display.columns}
-    )
+    display_custom_table(df_display)
 else:
     st.warning("No open holdings currently active.")
 
 st.divider()
 
-# Section 3: Center-Aligned Trade History Table
+# Section 3: Trade Execution History
 st.subheader("📜 Historical Execution Logs")
 if not trade_df.empty:
     sorted_trades = trade_df.sort_values(by="Date", ascending=False).reset_index(drop=True)
-    st.dataframe(
-        sorted_trades,
-        use_container_width=True,
-        column_config={col: st.column_config.Column(alignment="center") for col in sorted_trades.columns}
-    )
+    display_custom_table(sorted_trades)
 else:
     st.info("No trades executed yet.")
