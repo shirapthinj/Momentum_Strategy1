@@ -22,25 +22,25 @@
         },
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 1866.199951171875,
+            "peak": 1887.0,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
         "RRKABEL.NS": {
             "shares": 11,
-            "peak": 2801.199951171875,
+            "peak": 2810.60009765625,
             "entry_price": 2801.199951171875,
             "entry_date": "2026-08-25"
         },
         "NEULANDLAB.NS": {
             "shares": 1,
-            "peak": 22948.0,
+            "peak": 23545.0,
             "entry_price": 22948.0,
             "entry_date": "2026-08-25"
         },
         "ATHERENERG.NS": {
             "shares": 23,
-            "peak": 1439.4000244140625,
+            "peak": 1494.5999755859375,
             "entry_price": 1439.4000244140625,
             "entry_date": "2026-08-25"
         },
@@ -58,19 +58,19 @@
         },
         "AEGISLOG.NS": {
             "shares": 25,
-            "peak": 1321.5999755859375,
+            "peak": 1331.699951171875,
             "entry_price": 1321.5999755859375,
             "entry_date": "2026-08-25"
         },
         "ANANDRATHI.NS": {
             "shares": 15,
-            "peak": 2164.39990234375,
+            "peak": 2179.39990234375,
             "entry_price": 2164.39990234375,
             "entry_date": "2026-08-25"
         },
         "SYRMA.NS": {
             "shares": 22,
-            "peak": 1458.0999755859375,
+            "peak": 1474.0999755859375,
             "entry_price": 1458.0999755859375,
             "entry_date": "2026-08-25"
         },
@@ -82,7 +82,7 @@
         },
         "SAILIFE.NS": {
             "shares": 22,
-            "peak": 1455.5,
+            "peak": 1461.0,
             "entry_price": 1455.5,
             "entry_date": "2026-08-25"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-08-25"
+    "last_updated": "2026-08-26"
 }
