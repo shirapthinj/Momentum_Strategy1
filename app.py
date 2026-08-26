@@ -70,7 +70,7 @@ else:
         benchmark_returns[name] = 0.0
         benchmark_values[name] = init_cap
 
-# Metric Cards (Normalized monetary values)
+# Metric Cards (Monetary comparisons)
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Strategy Value", f"₹{current_val:,.0f}", f"{tot_ret:+.2f}%")
 col2.metric("Nifty Midcap 100", f"₹{benchmark_values.get('Nifty Midcap 100', init_cap):,.0f}", f"{benchmark_returns.get('Nifty Midcap 100', 0.0):+.2f}%")
@@ -80,7 +80,7 @@ col5.metric("Active Positions", f"{len(state['holdings'])} / 15")
 
 st.divider()
 
-# Section 1: Comparative % Return Chart
+# Section 1: Comparative Equity Curve Chart
 st.subheader("📈 Performance % Comparison (Strategy vs Benchmarks)")
 if not eq_df.empty:
     eq_df['Date'] = pd.to_datetime(eq_df['Date'])
@@ -99,24 +99,94 @@ if not eq_df.empty:
     fig.update_layout(hovermode="x unified", yaxis_title="Percentage Change (%)")
     st.plotly_chart(fig, use_container_width=True)
 else:
-    st.info("No execution data recorded yet. Comparative chart will display after historical days accumulate.")
+    st.info("No execution data recorded yet.")
 
-# Section 2: Active Holdings Table
-st.subheader("📋 Active Holdings & Dynamic Stops")
+st.divider()
+
+# Section 2: Active Holdings Performance Graph & Table
+st.subheader("📋 Active Holdings Performance & Dynamic Stops")
 if state["holdings"]:
+    tickers_list = list(state["holdings"].keys())
+    
+    # Download latest prices for active holdings
+    try:
+        live_data = yf.download(tickers_list, period="5d", progress=False)
+        if isinstance(live_data.columns, pd.MultiIndex):
+            level0 = live_data.columns.levels[0]
+            live_prices = live_data['Close'] if 'Close' in level0 else live_data['Adj Close']
+        else:
+            live_prices = live_data
+        live_prices = live_prices.ffill().bfill()
+        latest_p = live_prices.iloc[-1]
+    except Exception:
+        latest_p = {}
+
     h_list = []
     for ticker, info in state["holdings"].items():
+        entry_p = info["entry_price"]
+        shares = info["shares"]
+        
+        # Get live market price if available, fallback to entry price
+        if isinstance(latest_p, pd.Series) and ticker in latest_p and not pd.isna(latest_p[ticker]):
+            cur_p = float(latest_p[ticker])
+        elif isinstance(latest_p, (int, float)) and not pd.isna(latest_p):
+            cur_p = float(latest_p)
+        else:
+            cur_p = entry_p
+
+        pnl_pct = ((cur_p - entry_p) / entry_p) * 100
+        unrealized_pnl = (cur_p - entry_p) * shares
+        cur_val = cur_p * shares
+
         h_list.append({
             "Ticker": ticker,
             "Entry Date": info.get("entry_date", "N/A"),
-            "Entry Price (₹)": f"₹{info['entry_price']:.2f}",
-            "Shares": info["shares"],
-            "Peak Price (₹)": f"₹{info['peak']:.2f}",
-            "Capital Allocated (₹)": f"₹{info['shares'] * info['entry_price']:,.2f}"
+            "Entry Price (₹)": entry_p,
+            "Current Price (₹)": cur_p,
+            "Shares": shares,
+            "Peak Price (₹)": info["peak"],
+            "Current Value (₹)": cur_val,
+            "Unrealized PnL (₹)": unrealized_pnl,
+            "PnL (%)": pnl_pct
         })
-    st.dataframe(pd.DataFrame(h_list), use_container_width=True)
+
+    df_h = pd.DataFrame(h_list)
+    # Sort from highest positive % to negative %
+    df_h = df_h.sort_values(by="PnL (%)", ascending=False).reset_index(drop=True)
+
+    # 1. Performance Bar Chart
+    fig_holdings = px.bar(
+        df_h,
+        x="Ticker",
+        y="PnL (%)",
+        color="PnL (%)",
+        color_continuous_scale=["#FF4B4B", "#00CC96"],
+        color_continuous_midpoint=0,
+        text_auto='.2f',
+        title="Unrealized PnL % per Holding (Highest to Lowest)"
+    )
+    fig_holdings.update_layout(
+        xaxis_title="Stock Ticker",
+        yaxis_title="Unrealized PnL (%)",
+        coloraxis_showscale=False,
+        hovermode="x"
+    )
+    st.plotly_chart(fig_holdings, use_container_width=True)
+
+    # 2. Formatted Holdings Table
+    df_display = df_h.copy()
+    df_display["Entry Price (₹)"] = df_display["Entry Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
+    df_display["Current Price (₹)"] = df_display["Current Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
+    df_display["Peak Price (₹)"] = df_display["Peak Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
+    df_display["Current Value (₹)"] = df_display["Current Value (₹)"].apply(lambda x: f"₹{x:,.2f}")
+    df_display["Unrealized PnL (₹)"] = df_display["Unrealized PnL (₹)"].apply(lambda x: f"₹{x:,.2f}")
+    df_display["PnL (%)"] = df_display["PnL (%)"].apply(lambda x: f"{x:+.2f}%")
+
+    st.dataframe(df_display, use_container_width=True)
 else:
     st.warning("No open holdings currently active.")
+
+st.divider()
 
 # Section 3: Trade History
 st.subheader("📜 Historical Execution Logs")
