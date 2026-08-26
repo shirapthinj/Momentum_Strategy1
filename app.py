@@ -108,7 +108,6 @@ st.subheader("📋 Active Holdings Performance & Dynamic Stops")
 if state["holdings"]:
     tickers_list = list(state["holdings"].keys())
     
-    # Download latest prices for active holdings
     try:
         live_data = yf.download(tickers_list, period="5d", progress=False)
         if isinstance(live_data.columns, pd.MultiIndex):
@@ -126,7 +125,6 @@ if state["holdings"]:
         entry_p = info["entry_price"]
         shares = info["shares"]
         
-        # Get live market price if available, fallback to entry price
         if isinstance(latest_p, pd.Series) and ticker in latest_p and not pd.isna(latest_p[ticker]):
             cur_p = float(latest_p[ticker])
         elif isinstance(latest_p, (int, float)) and not pd.isna(latest_p):
@@ -151,7 +149,6 @@ if state["holdings"]:
         })
 
     df_h = pd.DataFrame(h_list)
-    # Sort from highest positive % to negative %
     df_h = df_h.sort_values(by="PnL (%)", ascending=False).reset_index(drop=True)
 
     # 1. Performance Bar Chart
@@ -173,7 +170,7 @@ if state["holdings"]:
     )
     st.plotly_chart(fig_holdings, use_container_width=True)
 
-    # 2. Formatted Holdings Table
+    # 2. Formatted & Center-Aligned Holdings Table
     df_display = df_h.copy()
     df_display["Entry Price (₹)"] = df_display["Entry Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
     df_display["Current Price (₹)"] = df_display["Current Price (₹)"].apply(lambda x: f"₹{x:,.2f}")
@@ -182,15 +179,24 @@ if state["holdings"]:
     df_display["Unrealized PnL (₹)"] = df_display["Unrealized PnL (₹)"].apply(lambda x: f"₹{x:,.2f}")
     df_display["PnL (%)"] = df_display["PnL (%)"].apply(lambda x: f"{x:+.2f}%")
 
-    st.dataframe(df_display, use_container_width=True)
+    st.dataframe(
+        df_display,
+        use_container_width=True,
+        column_config={col: st.column_config.Column(alignment="center") for col in df_display.columns}
+    )
 else:
     st.warning("No open holdings currently active.")
 
 st.divider()
 
-# Section 3: Trade History
+# Section 3: Center-Aligned Trade History Table
 st.subheader("📜 Historical Execution Logs")
 if not trade_df.empty:
-    st.dataframe(trade_df.sort_values(by="Date", ascending=False), use_container_width=True)
+    sorted_trades = trade_df.sort_values(by="Date", ascending=False).reset_index(drop=True)
+    st.dataframe(
+        sorted_trades,
+        use_container_width=True,
+        column_config={col: st.column_config.Column(alignment="center") for col in sorted_trades.columns}
+    )
 else:
     st.info("No trades executed yet.")
