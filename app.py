@@ -7,6 +7,27 @@ import os
 
 st.set_page_config(page_title="Momentum Strategy Dashboard", layout="wide")
 
+# Custom CSS for Header Bolding, Larger Font Size, and Centering
+st.markdown("""
+<style>
+    /* Dataframe Header Styling (Bold, Centered, Larger Font) */
+    div[data-testid="stDataFrame"] th, 
+    div[data-testid="stDataFrame"] div[role="columnheader"] {
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Data Cell Value Styling (Standard Font Size, Centered) */
+    div[data-testid="stDataFrame"] div[role="gridcell"] {
+        font-size: 14px !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 STATE_FILE = "data/portfolio_state.json"
 TRADE_LOG_FILE = "data/trade_log.csv"
 EQUITY_FILE = "data/equity_history.csv"
