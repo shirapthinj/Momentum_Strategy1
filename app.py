@@ -114,7 +114,7 @@ col5.metric("Active Positions", f"{len(state['holdings'])} / 15")
 
 st.divider()
 
-# Section 1: Performance Comparison Chart
+# Section 1: Custom Styled Performance Comparison Chart
 st.subheader("📈 Performance % Comparison (Strategy vs Benchmarks)")
 if not eq_df.empty:
     eq_df['Date'] = pd.to_datetime(eq_df['Date'])
@@ -129,7 +129,25 @@ if not eq_df.empty:
                 norm_series = ((s - s.iloc[0]) / s.iloc[0]) * 100
                 perf_df[name] = norm_series
     
-    fig = px.line(perf_df, labels={"value": "Return (%)", "variable": "Asset / Strategy"})
+    # Custom Palette Definition
+    color_map = {
+        'Strategy %': '#008800',        # Bright Dark Green
+        'Nifty 50': '#00BFFF',          # Sky Blue
+        'Nifty 500': '#FF6B6B',         # Light Red
+        'Nifty Midcap 100': '#555555'   # Dark Grey
+    }
+    
+    fig = px.line(
+        perf_df, 
+        color_discrete_map=color_map,
+        labels={"value": "Return (%)", "variable": "Asset / Strategy"}
+    )
+    
+    # Set Strategy % to bold line (width=3.5) and benchmarks to normal weight (width=1.5)
+    fig.for_each_trace(lambda trace: trace.update(
+        line=dict(width=3.5 if trace.name == 'Strategy %' else 1.5)
+    ))
+    
     fig.update_layout(hovermode="x unified", yaxis_title="Percentage Change (%)")
     st.plotly_chart(fig, use_container_width=True)
 else:
