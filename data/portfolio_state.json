@@ -4,13 +4,13 @@
     "holdings": {
         "WELCORP.NS": {
             "shares": 14,
-            "peak": 2345.5,
+            "peak": 2405.800048828125,
             "entry_price": 2345.5,
             "entry_date": "2026-08-25"
         },
         "HFCL.NS": {
             "shares": 140,
-            "peak": 238.00999450683594,
+            "peak": 245.83999633789062,
             "entry_price": 238.00999450683594,
             "entry_date": "2026-08-25"
         },
@@ -22,13 +22,13 @@
         },
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 1887.0,
+            "peak": 1929.4000244140625,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
         "RRKABEL.NS": {
             "shares": 11,
-            "peak": 2810.60009765625,
+            "peak": 2830.10009765625,
             "entry_price": 2801.199951171875,
             "entry_date": "2026-08-25"
         },
@@ -40,7 +40,7 @@
         },
         "ATHERENERG.NS": {
             "shares": 23,
-            "peak": 1494.5999755859375,
+            "peak": 1495.300048828125,
             "entry_price": 1439.4000244140625,
             "entry_date": "2026-08-25"
         },
@@ -52,7 +52,7 @@
         },
         "SONACOMS.NS": {
             "shares": 41,
-            "peak": 808.7999877929688,
+            "peak": 819.0,
             "entry_price": 808.7999877929688,
             "entry_date": "2026-08-25"
         },
@@ -64,13 +64,13 @@
         },
         "ANANDRATHI.NS": {
             "shares": 15,
-            "peak": 2179.39990234375,
+            "peak": 2182.89990234375,
             "entry_price": 2164.39990234375,
             "entry_date": "2026-08-25"
         },
         "SYRMA.NS": {
             "shares": 22,
-            "peak": 1474.0999755859375,
+            "peak": 1493.5,
             "entry_price": 1458.0999755859375,
             "entry_date": "2026-08-25"
         },
@@ -82,7 +82,7 @@
         },
         "SAILIFE.NS": {
             "shares": 22,
-            "peak": 1461.0,
+            "peak": 1488.199951171875,
             "entry_price": 1455.5,
             "entry_date": "2026-08-25"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-08-26"
+    "last_updated": "2026-08-27"
 }
