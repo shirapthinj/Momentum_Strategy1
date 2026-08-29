@@ -67,7 +67,7 @@ init_cap = state.get("initial_capital", 500000.0)
 current_val = eq_df["Portfolio_Value"].iloc[-1] if not eq_df.empty else init_cap
 tot_ret = ((current_val - init_cap) / init_cap) * 100
 
-# Benchmark Calculations (Normalized to Initial Capital)
+# Benchmark Calculations (Robust Per-Series Non-Null Fetch)
 benchmark_returns = {}
 benchmark_values = {}
 bm_prices = pd.DataFrame()
@@ -84,14 +84,16 @@ if not eq_df.empty:
         else:
             bm_prices = raw_bm
 
-        bm_prices = bm_prices.ffill().bfill()
-
         for name, sym in BENCHMARKS.items():
-            if sym in bm_prices.columns and len(bm_prices[sym].dropna()) > 1:
+            if sym in bm_prices.columns:
                 s = bm_prices[sym].dropna()
-                pct_chg = ((s.iloc[-1] - s.iloc[0]) / s.iloc[0]) * 100
-                benchmark_returns[name] = pct_chg
-                benchmark_values[name] = init_cap * (1 + (pct_chg / 100.0))
+                if not s.empty and len(s) > 1:
+                    pct_chg = ((s.iloc[-1] - s.iloc[0]) / s.iloc[0]) * 100
+                    benchmark_returns[name] = pct_chg
+                    benchmark_values[name] = init_cap * (1 + (pct_chg / 100.0))
+                else:
+                    benchmark_returns[name] = 0.0
+                    benchmark_values[name] = init_cap
             else:
                 benchmark_returns[name] = 0.0
                 benchmark_values[name] = init_cap
@@ -104,7 +106,7 @@ else:
         benchmark_returns[name] = 0.0
         benchmark_values[name] = init_cap
 
-# Metric Cards
+# Metric Cards (Monetary comparisons)
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Strategy Value", f"₹{current_val:,.0f}", f"{tot_ret:+.2f}%")
 col2.metric("Nifty Midcap 100", f"₹{benchmark_values.get('Nifty Midcap 100', init_cap):,.0f}", f"{benchmark_returns.get('Nifty Midcap 100', 0.0):+.2f}%")
@@ -114,7 +116,7 @@ col5.metric("Active Positions", f"{len(state['holdings'])} / 15")
 
 st.divider()
 
-# Section 1: Custom Styled Performance Comparison Chart
+# Section 1: Performance Comparison Chart
 st.subheader("📈 Performance % Comparison (Strategy vs Benchmarks)")
 if not eq_df.empty:
     eq_df['Date'] = pd.to_datetime(eq_df['Date'])
@@ -129,7 +131,7 @@ if not eq_df.empty:
                 norm_series = ((s - s.iloc[0]) / s.iloc[0]) * 100
                 perf_df[name] = norm_series
     
-    # Custom Palette Definition
+    # Custom Palette & Line Style Configuration
     color_map = {
         'Strategy %': '#008800',        # Bright Dark Green
         'Nifty 50': '#00BFFF',          # Sky Blue
@@ -143,7 +145,7 @@ if not eq_df.empty:
         labels={"value": "Return (%)", "variable": "Asset / Strategy"}
     )
     
-    # Set Strategy % to bold line (width=3.5) and benchmarks to normal weight (width=1.5)
+    # Bold strategy line (width 3.5), non-bold benchmark lines (width 1.5)
     fig.for_each_trace(lambda trace: trace.update(
         line=dict(width=3.5 if trace.name == 'Strategy %' else 1.5)
     ))
@@ -155,34 +157,34 @@ else:
 
 st.divider()
 
-# Section 2: Active Holdings Table & Graph
+# Section 2: Active Holdings Table & Graph (Robust Individual Price Fetching)
 st.subheader("📋 Active Holdings Performance & Dynamic Stops")
 if state["holdings"]:
     tickers_list = list(state["holdings"].keys())
     
+    # Download 1 month of historical data to prevent weekend/holiday truncations
+    live_prices = pd.DataFrame()
     try:
-        live_data = yf.download(tickers_list, period="5d", progress=False)
+        live_data = yf.download(tickers_list, period="1mo", progress=False)
         if isinstance(live_data.columns, pd.MultiIndex):
             level0 = live_data.columns.levels[0]
             live_prices = live_data['Close'] if 'Close' in level0 else live_data['Adj Close']
         else:
             live_prices = live_data
-        live_prices = live_prices.ffill().bfill()
-        latest_p = live_prices.iloc[-1]
     except Exception:
-        latest_p = {}
+        live_prices = pd.DataFrame()
 
     h_list = []
     for ticker, info in state["holdings"].items():
         entry_p = info["entry_price"]
         shares = info["shares"]
         
-        if isinstance(latest_p, pd.Series) and ticker in latest_p and not pd.isna(latest_p[ticker]):
-            cur_p = float(latest_p[ticker])
-        elif isinstance(latest_p, (int, float)) and not pd.isna(latest_p):
-            cur_p = float(latest_p)
-        else:
-            cur_p = entry_p
+        # Extract the absolute latest non-null closing price for each individual ticker
+        cur_p = entry_p
+        if not live_prices.empty and ticker in live_prices.columns:
+            valid_series = live_prices[ticker].dropna()
+            if not valid_series.empty:
+                cur_p = float(valid_series.iloc[-1])
 
         pnl_pct = ((cur_p - entry_p) / entry_p) * 100
         unrealized_pnl = (cur_p - entry_p) * shares
@@ -194,7 +196,7 @@ if state["holdings"]:
             "Entry Price (₹)": entry_p,
             "Current Price (₹)": cur_p,
             "Shares": shares,
-            "Peak Price (₹)": info["peak"],
+            "Peak Price (₹)": max(info["peak"], cur_p),
             "Current Value (₹)": cur_val,
             "Unrealized PnL (₹)": unrealized_pnl,
             "PnL (%)": pnl_pct
