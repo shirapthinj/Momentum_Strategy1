@@ -1,10 +1,10 @@
 {
-    "cash": 22685.40460205078,
+    "cash": 4419.905822753906,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
             "shares": 14,
-            "peak": 2405.800048828125,
+            "peak": 2553.60009765625,
             "entry_price": 2345.5,
             "entry_date": "2026-08-25"
         },
@@ -40,13 +40,13 @@
         },
         "ATHERENERG.NS": {
             "shares": 23,
-            "peak": 1717.699951171875,
+            "peak": 1725.5999755859375,
             "entry_price": 1439.4000244140625,
             "entry_date": "2026-08-25"
         },
         "LENSKART.NS": {
             "shares": 50,
-            "peak": 662.4000244140625,
+            "peak": 663.75,
             "entry_price": 655.9500122070312,
             "entry_date": "2026-08-25"
         },
@@ -54,12 +54,6 @@
             "shares": 41,
             "peak": 819.0,
             "entry_price": 808.7999877929688,
-            "entry_date": "2026-08-25"
-        },
-        "AEGISLOG.NS": {
-            "shares": 25,
-            "peak": 1331.699951171875,
-            "entry_price": 1321.5999755859375,
             "entry_date": "2026-08-25"
         },
         "ANANDRATHI.NS": {
@@ -82,16 +76,22 @@
         },
         "SAILIFE.NS": {
             "shares": 22,
-            "peak": 1488.199951171875,
+            "peak": 1518.0999755859375,
             "entry_price": 1455.5,
             "entry_date": "2026-08-25"
         },
         "ACMESOLAR.NS": {
             "shares": 83,
-            "peak": 401.95001220703125,
+            "peak": 403.70001220703125,
             "entry_price": 399.29998779296875,
             "entry_date": "2026-08-25"
+        },
+        "OFSS.NS": {
+            "shares": 4,
+            "peak": 12187.0,
+            "entry_price": 12187.0,
+            "entry_date": "2026-09-01"
         }
     },
-    "last_updated": "2026-08-31"
+    "last_updated": "2026-09-01"
 }
