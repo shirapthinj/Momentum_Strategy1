@@ -46,7 +46,7 @@
         },
         "LENSKART.NS": {
             "shares": 50,
-            "peak": 663.75,
+            "peak": 668.9000244140625,
             "entry_price": 655.9500122070312,
             "entry_date": "2026-08-25"
         },
@@ -76,7 +76,7 @@
         },
         "SAILIFE.NS": {
             "shares": 22,
-            "peak": 1518.0999755859375,
+            "peak": 1587.0,
             "entry_price": 1455.5,
             "entry_date": "2026-08-25"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-09-01"
         }
     },
-    "last_updated": "2026-09-01"
+    "last_updated": "2026-09-02"
 }
