@@ -4,7 +4,7 @@
     "holdings": {
         "WELCORP.NS": {
             "shares": 14,
-            "peak": 2641.60009765625,
+            "peak": 2776.89990234375,
             "entry_price": 2345.5,
             "entry_date": "2026-08-25"
         },
@@ -88,10 +88,10 @@
         },
         "JINDALSAW.NS": {
             "shares": 99,
-            "peak": 311.70001220703125,
+            "peak": 317.5,
             "entry_price": 309.54998779296875,
             "entry_date": "2026-09-07"
         }
     },
-    "last_updated": "2026-09-09"
+    "last_updated": "2026-09-10"
 }
