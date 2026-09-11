@@ -22,7 +22,7 @@
         },
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 1946.9000244140625,
+            "peak": 1969.0,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-09-07"
         }
     },
-    "last_updated": "2026-09-10"
+    "last_updated": "2026-09-11"
 }
