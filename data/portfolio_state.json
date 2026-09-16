@@ -1,17 +1,11 @@
 {
-    "cash": 32.55810546875,
+    "cash": 57683.70861816406,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
             "shares": 14,
             "peak": 2776.89990234375,
             "entry_price": 2345.5,
-            "entry_date": "2026-08-25"
-        },
-        "HFCL.NS": {
-            "shares": 140,
-            "peak": 251.47000122070312,
-            "entry_price": 238.00999450683594,
             "entry_date": "2026-08-25"
         },
         "RADICO.NS": {
@@ -85,13 +79,7 @@
             "peak": 12187.0,
             "entry_price": 12187.0,
             "entry_date": "2026-09-01"
-        },
-        "JINDALSAW.NS": {
-            "shares": 99,
-            "peak": 317.5,
-            "entry_price": 309.54998779296875,
-            "entry_date": "2026-09-07"
         }
     },
-    "last_updated": "2026-09-15"
+    "last_updated": "2026-09-16"
 }
