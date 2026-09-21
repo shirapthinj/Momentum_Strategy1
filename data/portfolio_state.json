@@ -1,5 +1,5 @@
 {
-    "cash": 57683.70861816406,
+    "cash": 101327.70861816406,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
@@ -16,7 +16,7 @@
         },
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 1969.0,
+            "peak": 2017.5,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
@@ -70,16 +70,10 @@
         },
         "ACMESOLAR.NS": {
             "shares": 83,
-            "peak": 435.25,
+            "peak": 458.1000061035156,
             "entry_price": 399.29998779296875,
             "entry_date": "2026-08-25"
-        },
-        "OFSS.NS": {
-            "shares": 4,
-            "peak": 12187.0,
-            "entry_price": 12187.0,
-            "entry_date": "2026-09-01"
         }
     },
-    "last_updated": "2026-09-18"
+    "last_updated": "2026-09-21"
 }
