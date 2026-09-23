@@ -1,10 +1,10 @@
 {
-    "cash": 101327.70861816406,
+    "cash": 135813.9091796875,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
             "shares": 14,
-            "peak": 2776.89990234375,
+            "peak": 2796.800048828125,
             "entry_price": 2345.5,
             "entry_date": "2026-08-25"
         },
@@ -16,7 +16,7 @@
         },
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 2017.5,
+            "peak": 2034.0,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
@@ -24,12 +24,6 @@
             "shares": 1,
             "peak": 23995.0,
             "entry_price": 22948.0,
-            "entry_date": "2026-08-25"
-        },
-        "ATHERENERG.NS": {
-            "shares": 23,
-            "peak": 1725.5999755859375,
-            "entry_price": 1439.4000244140625,
             "entry_date": "2026-08-25"
         },
         "LENSKART.NS": {
@@ -40,7 +34,7 @@
         },
         "SONACOMS.NS": {
             "shares": 41,
-            "peak": 819.0,
+            "peak": 833.0,
             "entry_price": 808.7999877929688,
             "entry_date": "2026-08-25"
         },
@@ -75,5 +69,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-09-22"
+    "last_updated": "2026-09-23"
 }
