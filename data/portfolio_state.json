@@ -1,10 +1,10 @@
 {
-    "cash": 135813.9091796875,
+    "cash": 167715.90991210938,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
             "shares": 14,
-            "peak": 2796.800048828125,
+            "peak": 2832.39990234375,
             "entry_price": 2345.5,
             "entry_date": "2026-08-25"
         },
@@ -38,12 +38,6 @@
             "entry_price": 808.7999877929688,
             "entry_date": "2026-08-25"
         },
-        "ANANDRATHI.NS": {
-            "shares": 15,
-            "peak": 2229.5,
-            "entry_price": 2164.39990234375,
-            "entry_date": "2026-08-25"
-        },
         "SYRMA.NS": {
             "shares": 22,
             "peak": 1741.800048828125,
@@ -69,5 +63,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-09-24"
+    "last_updated": "2026-09-25"
 }
