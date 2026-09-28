@@ -1,5 +1,5 @@
 {
-    "cash": 167715.90991210938,
+    "cash": 217956.91088867188,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
@@ -20,12 +20,6 @@
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
-        "NEULANDLAB.NS": {
-            "shares": 1,
-            "peak": 23995.0,
-            "entry_price": 22948.0,
-            "entry_date": "2026-08-25"
-        },
         "LENSKART.NS": {
             "shares": 50,
             "peak": 707.2000122070312,
@@ -40,14 +34,8 @@
         },
         "SYRMA.NS": {
             "shares": 22,
-            "peak": 1741.800048828125,
+            "peak": 1746.4000244140625,
             "entry_price": 1458.0999755859375,
-            "entry_date": "2026-08-25"
-        },
-        "CARTRADE.NS": {
-            "shares": 10,
-            "peak": 3179.89990234375,
-            "entry_price": 3144.800048828125,
             "entry_date": "2026-08-25"
         },
         "SAILIFE.NS": {
@@ -63,5 +51,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-09-25"
+    "last_updated": "2026-09-28"
 }
