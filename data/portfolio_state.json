@@ -1,5 +1,5 @@
 {
-    "cash": 248504.91088867188,
+    "cash": 282043.9108886719,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
@@ -28,14 +28,8 @@
         },
         "SYRMA.NS": {
             "shares": 22,
-            "peak": 1746.4000244140625,
+            "peak": 1782.9000244140625,
             "entry_price": 1458.0999755859375,
-            "entry_date": "2026-08-25"
-        },
-        "SAILIFE.NS": {
-            "shares": 22,
-            "peak": 1675.4000244140625,
-            "entry_price": 1455.5,
             "entry_date": "2026-08-25"
         },
         "ACMESOLAR.NS": {
@@ -45,5 +39,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-09-29"
+    "last_updated": "2026-09-30"
 }
