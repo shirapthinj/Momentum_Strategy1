@@ -1,5 +1,5 @@
 {
-    "cash": 348009.71200561523,
+    "cash": 382056.91146850586,
     "initial_capital": 500000.0,
     "holdings": {
         "WELCORP.NS": {
@@ -10,7 +10,7 @@
         },
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 2060.10009765625,
+            "peak": 2069.0,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
@@ -19,13 +19,7 @@
             "peak": 833.0,
             "entry_price": 808.7999877929688,
             "entry_date": "2026-08-25"
-        },
-        "SYRMA.NS": {
-            "shares": 22,
-            "peak": 1782.9000244140625,
-            "entry_price": 1458.0999755859375,
-            "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-10-16"
+    "last_updated": "2026-10-19"
 }
