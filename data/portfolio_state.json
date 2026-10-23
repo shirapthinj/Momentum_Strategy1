@@ -1,13 +1,7 @@
 {
-    "cash": 413458.8124694824,
+    "cash": 446900.6117858887,
     "initial_capital": 500000.0,
     "holdings": {
-        "WELCORP.NS": {
-            "shares": 14,
-            "peak": 2842.0,
-            "entry_price": 2345.5,
-            "entry_date": "2026-08-25"
-        },
         "LAURUSLABS.NS": {
             "shares": 17,
             "peak": 2069.0,
@@ -15,5 +9,5 @@
             "entry_date": "2026-08-25"
         }
     },
-    "last_updated": "2026-10-22"
+    "last_updated": "2026-10-23"
 }
