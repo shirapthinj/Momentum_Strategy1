@@ -22,7 +22,7 @@
         },
         "GLAND.NS": {
             "shares": 10,
-            "peak": 3159.0,
+            "peak": 3169.300048828125,
             "entry_price": 3159.0,
             "entry_date": "2026-11-04"
         },
@@ -34,7 +34,7 @@
         },
         "ANANDRATHI.NS": {
             "shares": 13,
-            "peak": 2370.0,
+            "peak": 2373.5,
             "entry_price": 2296.0,
             "entry_date": "2026-11-04"
         },
@@ -52,7 +52,7 @@
         },
         "SHYAMMETL.NS": {
             "shares": 25,
-            "peak": 1270.0,
+            "peak": 1300.5999755859375,
             "entry_price": 1231.4000244140625,
             "entry_date": "2026-11-04"
         },
@@ -64,13 +64,13 @@
         },
         "INDHOTEL.NS": {
             "shares": 37,
-            "peak": 875.0,
+            "peak": 888.0,
             "entry_price": 849.0,
             "entry_date": "2026-11-04"
         },
         "LENSKART.NS": {
             "shares": 46,
-            "peak": 718.3499755859375,
+            "peak": 724.75,
             "entry_price": 689.7000122070312,
             "entry_date": "2026-11-04"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-11-04"
         }
     },
-    "last_updated": "2026-11-05"
+    "last_updated": "2026-11-06"
 }
