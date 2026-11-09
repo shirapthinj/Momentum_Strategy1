@@ -4,7 +4,7 @@
     "holdings": {
         "LAURUSLABS.NS": {
             "shares": 17,
-            "peak": 2405.5,
+            "peak": 2454.0,
             "entry_price": 1866.199951171875,
             "entry_date": "2026-08-25"
         },
@@ -16,13 +16,13 @@
         },
         "CUPID.NS": {
             "shares": 94,
-            "peak": 341.25,
+            "peak": 342.8500061035156,
             "entry_price": 336.5,
             "entry_date": "2026-11-04"
         },
         "GLAND.NS": {
             "shares": 10,
-            "peak": 3169.300048828125,
+            "peak": 3302.39990234375,
             "entry_price": 3159.0,
             "entry_date": "2026-11-04"
         },
@@ -40,31 +40,31 @@
         },
         "ATHERENERG.NS": {
             "shares": 17,
-            "peak": 1840.0,
+            "peak": 1859.800048828125,
             "entry_price": 1840.0,
             "entry_date": "2026-11-04"
         },
         "SANSERA.NS": {
             "shares": 7,
-            "peak": 4431.7998046875,
+            "peak": 4653.39990234375,
             "entry_price": 4430.7998046875,
             "entry_date": "2026-11-04"
         },
         "SHYAMMETL.NS": {
             "shares": 25,
-            "peak": 1300.5999755859375,
+            "peak": 1320.5,
             "entry_price": 1231.4000244140625,
             "entry_date": "2026-11-04"
         },
         "PVRINOX.NS": {
             "shares": 20,
-            "peak": 1581.4000244140625,
+            "peak": 1589.800048828125,
             "entry_price": 1577.300048828125,
             "entry_date": "2026-11-04"
         },
         "INDHOTEL.NS": {
             "shares": 37,
-            "peak": 888.0,
+            "peak": 891.6500244140625,
             "entry_price": 849.0,
             "entry_date": "2026-11-04"
         },
@@ -76,22 +76,22 @@
         },
         "RUBICON.NS": {
             "shares": 18,
-            "peak": 1740.5999755859375,
+            "peak": 1771.699951171875,
             "entry_price": 1716.800048828125,
             "entry_date": "2026-11-04"
         },
         "SONACOMS.NS": {
             "shares": 35,
-            "peak": 915.25,
+            "peak": 924.0,
             "entry_price": 893.7000122070312,
             "entry_date": "2026-11-04"
         },
         "PTCIL.NS": {
             "shares": 1,
-            "peak": 24410.0,
+            "peak": 24745.0,
             "entry_price": 24410.0,
             "entry_date": "2026-11-04"
         }
     },
-    "last_updated": "2026-11-06"
+    "last_updated": "2026-11-09"
 }
