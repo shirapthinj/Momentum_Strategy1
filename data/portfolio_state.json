@@ -16,13 +16,13 @@
         },
         "CUPID.NS": {
             "shares": 94,
-            "peak": 354.0,
+            "peak": 384.79998779296875,
             "entry_price": 336.5,
             "entry_date": "2026-11-04"
         },
         "GLAND.NS": {
             "shares": 10,
-            "peak": 3302.39990234375,
+            "peak": 3308.699951171875,
             "entry_price": 3159.0,
             "entry_date": "2026-11-04"
         },
@@ -40,13 +40,13 @@
         },
         "ATHERENERG.NS": {
             "shares": 17,
-            "peak": 1868.199951171875,
+            "peak": 1923.0,
             "entry_price": 1840.0,
             "entry_date": "2026-11-04"
         },
         "SANSERA.NS": {
             "shares": 7,
-            "peak": 4655.10009765625,
+            "peak": 4701.7998046875,
             "entry_price": 4430.7998046875,
             "entry_date": "2026-11-04"
         },
@@ -58,7 +58,7 @@
         },
         "PVRINOX.NS": {
             "shares": 20,
-            "peak": 1589.800048828125,
+            "peak": 1652.5999755859375,
             "entry_price": 1577.300048828125,
             "entry_date": "2026-11-04"
         },
@@ -70,7 +70,7 @@
         },
         "LENSKART.NS": {
             "shares": 46,
-            "peak": 724.75,
+            "peak": 727.4500122070312,
             "entry_price": 689.7000122070312,
             "entry_date": "2026-11-04"
         },
@@ -82,7 +82,7 @@
         },
         "SONACOMS.NS": {
             "shares": 35,
-            "peak": 925.0,
+            "peak": 926.0,
             "entry_price": 893.7000122070312,
             "entry_date": "2026-11-04"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-11-04"
         }
     },
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
 }
