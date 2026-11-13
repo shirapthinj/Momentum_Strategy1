@@ -22,7 +22,7 @@
         },
         "GLAND.NS": {
             "shares": 10,
-            "peak": 3308.699951171875,
+            "peak": 3334.10009765625,
             "entry_price": 3159.0,
             "entry_date": "2026-11-04"
         },
@@ -40,13 +40,13 @@
         },
         "ATHERENERG.NS": {
             "shares": 17,
-            "peak": 1923.0,
+            "peak": 1945.0,
             "entry_price": 1840.0,
             "entry_date": "2026-11-04"
         },
         "SANSERA.NS": {
             "shares": 7,
-            "peak": 4701.7998046875,
+            "peak": 4708.39990234375,
             "entry_price": 4430.7998046875,
             "entry_date": "2026-11-04"
         },
@@ -93,5 +93,5 @@
             "entry_date": "2026-11-04"
         }
     },
-    "last_updated": "2026-11-12"
+    "last_updated": "2026-11-13"
 }
